@@ -1,4 +1,5 @@
-# Finance Manager
+# PT.Winnicode Garude Teknologi
+#Finace
 
 Aplikasi manajemen keuangan perusahaan — catat pemasukan, pengeluaran, dan ekspor laporan dengan mudah. Dibangun menggunakan Laravel, Blade, Tailwind CSS, dan Vite.
 

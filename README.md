@@ -1,4 +1,4 @@
-# PT.Winnicode Garude Teknologi
+<img width="948" height="442" alt="winnicode3" src="https://github.com/user-attachments/assets/0005629d-f288-4a35-bec0-927a4d8cd965" /># PT.Winnicode Garude Teknologi
 #Finace
 
 Aplikasi manajemen keuangan perusahaan — catat pemasukan, pengeluaran, dan ekspor laporan dengan mudah. Dibangun menggunakan Laravel, Blade, Tailwind CSS, dan Vite.

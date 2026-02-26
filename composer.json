@@ -8,7 +8,8 @@
     "require": {
         "php": "^8.2",
         "laravel/framework": "^11.31",
-        "laravel/tinker": "^2.9"
+        "laravel/tinker": "^2.9",
+        "maatwebsite/excel": "^3.1"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
@@ -66,6 +67,12 @@
         "allow-plugins": {
             "pestphp/pest-plugin": true,
             "php-http/discovery": true
+        },
+        "audit": {
+            "ignore": ["PKSA-365x-2zjk-pt47", "PKSA-4s43-t146-6123", "PKSA-z3gr-8qht-p93v"]
+        },
+        "platform": {
+            "ext-gd": "0"
         }
     },
     "minimum-stability": "stable",

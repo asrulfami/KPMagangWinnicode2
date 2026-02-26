@@ -22,13 +22,13 @@ class AuthenticatedSessionController extends Controller
     /**
      * Handle an incoming authentication request.
      */
-    public function store(LoginRequest $request)
+    public function store(LoginRequest $request): RedirectResponse
     {
-        $request->authenticate();  // Validasi kredensial
+        $request->authenticate();
 
-        $request->session()->regenerate();  // Regenerate session ID untuk keamanan session fixation
+        $request->session()->regenerate();
 
-        return redirect()->intended(RouteServiceProvider::HOME); // Redirect setelah login sukses
+        return redirect()->intended(route('dashboard', absolute: false));
     }
 
     /**

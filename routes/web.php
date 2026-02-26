@@ -1,35 +1,37 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\ExportController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\ReportController;
 use Illuminate\Support\Facades\Route;
 
-// Halaman welcome (bisa diganti nanti)
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('login');
 });
 
-// Dashboard protected dengan auth dan verified
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
-// Group route yang menggunakan middleware auth
 Route::middleware(['auth', 'verified'])->group(function () {
+    // Dashboard
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-    // Profile management
+    // Categories
+    Route::resource('categories', CategoryController::class);
+
+    // Transactions
+    Route::resource('transactions', TransactionController::class);
+
+    // Export
+    Route::post('/export', [ExportController::class, 'export'])->name('export');
+
+    // Laporan (Reports)
+    Route::get('/laporan', [ReportController::class, 'index'])->name('laporan');
+
+    // Profile
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-
-    // Resource routes untuk categories dan transactions (hanya index, create, store)
-    Route::resource('categories', CategoryController::class)->only(['index', 'create', 'store']);
-    Route::resource('transactions', TransactionController::class)->only(['index', 'create', 'store']);
-
-    // Route laporan keuangan
-    Route::get('laporan', [ReportController::class, 'index'])->name('laporan');
 });
 
 require __DIR__.'/auth.php';

@@ -10,12 +10,12 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = Category::all();
-        return view('categories.index', compact('categories'));
+        return view('finance.categories.index', compact('categories'));
     }
 
     public function create()
     {
-        return view('categories.create');
+        return view('finance.categories.create');
     }
 
     public function store(Request $request)

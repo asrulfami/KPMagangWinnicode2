@@ -1,66 +1,135 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Finance Manager
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Aplikasi manajemen keuangan perusahaan — catat pemasukan, pengeluaran, dan ekspor laporan dengan mudah. Dibangun menggunakan Laravel, Blade, Tailwind CSS, dan Vite.
 
-## About Laravel
+## Ringkasan
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- Backend: Laravel 11 (PHP)
+- Frontend: Blade + Tailwind CSS
+- Database: MySQL
+- Build: Vite
+- Export: Laravel Excel (Maatwebsite) / CSV
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Fitur Utama
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- Autentikasi pengguna (login)
+- Dashboard ringkasan pemasukan/pengeluaran dan saldo
+- Manajemen transaksi: tambah / edit / hapus
+- Kategori transaksi (opsional)
+- Filter dan pencarian transaksi (rentang tanggal, jenis, teks)
+- Ekspor laporan ke CSV atau Excel
+- UI responsif dan animasi SVG untuk grafik
 
-## Learning Laravel
+## Persyaratan Sistem
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- PHP >= 8.2
+- Composer
+- Node.js & npm
+- MySQL
+- (Opsional) XAMPP untuk pengembangan lokal
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## Instalasi & Menjalankan (Development)
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+1. Clone repository:
 
-## Laravel Sponsors
+```bash
+git clone <your-repo-url> C:\xampp\htdocs\MagangWinnicode
+cd C:\xampp\htdocs\MagangWinnicode
+```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+2. Install dependencies:
 
-### Premium Partners
+```bash
+composer install
+npm install
+```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+3. Konfigurasi environment:
 
-## Contributing
+```bash
+copy .env.example .env
+php artisan key:generate
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Edit file `.env` untuk konfigurasi database:
 
-## Code of Conduct
+```
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=magangwinnicode
+DB_USERNAME=root
+DB_PASSWORD=
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+4. Migrasi dan seeder (akan mengosongkan db jika menggunakan `migrate:fresh`):
 
-## Security Vulnerabilities
+```bash
+php artisan migrate --seed
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+5. Jalankan server:
 
-## License
+```bash
+# Laravel (development)
+php artisan serve
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+# Vite (opsional untuk live reload frontend)
+npm run dev
+```
+
+6. Build assets untuk produksi:
+
+```bash
+npm run build
+```
+
+Akses aplikasi di: http://localhost:8000 (atau port yang ditampilkan oleh `php artisan serve`).
+
+## Default (Seeder)
+
+Jika seeder disertakan, akun demo biasanya dibuat saat `--seed` dijalankan. Contoh kredensial (periksa `database/seeders` untuk yang benar):
+
+- Email: demo@finance.com
+- Password: password
+
+## Struktur Database (ringkas)
+
+- `users`: data pengguna
+- `categories`: kategori transaksi (opsional)
+- `transactions`: menyimpan transaksi (type: income/expense, amount, date, description, category_id)
+
+## Testing
+
+Project ini menggunakan Pest/PHPUnit untuk pengujian. Jalankan:
+
+```bash
+./vendor/bin/pest
+# atau
+php artisan test
+```
+
+## Pengembangan & Kontribusi
+
+- Ikuti standar PSR, gunakan migrations dan seeders untuk perubahan DB.
+- Buat branch fitur (`feature/xxx`) dan kirim pull request.
+
+## Publish / Push ke GitHub
+
+Contoh perintah singkat untuk commit dan push:
+
+```bash
+git add .
+git commit -m "Update README.md — reflect major changes"
+git push origin main
+```
+
+Ganti `main` dengan nama branch Anda jika berbeda.
+
+## Lisensi
+
+Dokumen ini dan kode proyek mengikuti lisensi MIT (periksa header/`composer.json` untuk konfirmasi).
+
+---
+
+File README ini telah diperbarui agar sesuai dengan perubahan total aplikasi.
